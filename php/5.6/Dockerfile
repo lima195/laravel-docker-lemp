@@ -54,10 +54,7 @@ RUN docker-php-ext-install \
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && composer self-update 1.10.19 \
-    && composer global require hirak/prestissimo --no-plugins --no-scripts
-
+    && mv composer.phar /usr/local/bin/composer
 
 # PHPUnit
 RUN wget https://phar.phpunit.de/phpunit.phar -O /usr/local/bin/phpunit \

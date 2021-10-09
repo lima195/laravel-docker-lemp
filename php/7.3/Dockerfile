@@ -89,10 +89,7 @@ RUN docker-php-ext-enable \
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && composer self-update 1.10.19 \
-    && composer global require hirak/prestissimo --no-plugins --no-scripts \
-    && composer require --dev mage2tv/magento-cache-clean
+    && mv composer.phar /usr/local/bin/composer
 
 ##
 # Mailhog
@@ -105,22 +102,6 @@ RUN apt-get -y install golang-go \
 # Install mhsendmail
 RUN go get github.com/mailhog/mhsendmail \
     && ln -s  ~/go/bin/mhsendmail /usr/bin/mhsendmail
-
-##
-# Node | Gulp | Grunt
-##
-
-ARG NODE_VERSION=9.11.2
-ARG NODE_PACKAGE=node-v$NODE_VERSION-linux-x64
-ARG NODE_HOME=/opt/$NODE_PACKAGE
-
-ENV NODE_PATH $NODE_HOME/lib/node_modules
-ENV PATH $NODE_HOME/bin:$PATH
-
-RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
-
-RUN npm install -g gulp
-RUN npm install -g grunt
 
 ##
 # Owner Permissions
